@@ -1,6 +1,7 @@
 package condominio;
 
 import estruturas.vetor.MyVetor;
+import java.util.Scanner;
 import javax.swing.JOptionPane;
 import model.Condominio;
 
@@ -10,15 +11,22 @@ import model.Condominio;
  */
 public class Main {
 
-    /**
-     * @param args the command line arguments
-     */
+    public static boolean hasCondominio(int cod, MyVetor<Condominio> listaCondominio) {
+        for (Condominio c : listaCondominio) {
+            if (c.getCodigo() == cod) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static void main(String[] args) {
+        Scanner ler = new Scanner(System.in);
         MyVetor<Condominio> listaCondominio = new MyVetor();
         int codCondominio = 1;
-        int op = 0;
+        int op;
         do {
-            JOptionPane.showInputDialog("--MENU--\n"
+            op = Integer.parseInt(JOptionPane.showInputDialog("--MENU--\n"
                     + "1 – Cadastrar condomínio\n"
                     + "2 – Cadastrar bloco (edifício de um condomínio)\n"
                     + "3 – Cadastrar apartamento\n"
@@ -28,7 +36,8 @@ public class Main {
                     + "7 – Listar apartamentos de um condomínio\n"
                     + "8 – Listar apartamentos não vendidos de um condomínio\n"
                     + "9 – Gerar relatório por condomínio com as despesas dos apartamentos não vendidos\n"
-                    + "10 – Listar os apartamentos de uma pessoa");
+                    + "10 – Listar os apartamentos de uma pessoa\n"
+                    + "0- SAIR"));
 
             switch (op) {
                 case 1://cadastrar condominio
@@ -38,10 +47,20 @@ public class Main {
                     ));
                     break;
                 case 2://cadastrar bloco
-                    
+                    int codCondCadastroBloco = Integer.parseInt(JOptionPane.showInputDialog("Código do condomínio"));
+                    if (hasCondominio(codCondCadastroBloco, listaCondominio)) {
+                        for (Condominio c : listaCondominio) {
+                            if (c.getCodigo() == codCondCadastroBloco) {
+                                c.addBloco(JOptionPane.showInputDialog("Nome do bloco:"));
+                                break;
+                            }
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Condominio não encontrado");
+                    }
 
             }
-        } while (op == 0);
+        } while (op != 0);
     }
 
 }
