@@ -5,6 +5,7 @@ import java.util.Scanner;
 import javax.swing.JOptionPane;
 import model.Bloco;
 import model.Condominio;
+import model.Pessoa;
 
 /**
  *
@@ -40,8 +41,9 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        Scanner ler = new Scanner(System.in);
         MyVetor<Condominio> listaCondominio = new MyVetor();
+        MyVetor<Pessoa> listaPessoa = new MyVetor();
+
         int codCondominio = 1;
         int op;
         do {
@@ -100,6 +102,25 @@ public class Main {
                         JOptionPane.showMessageDialog(null, "Condominio não encontrado");
                     }
                     break;
+                case 4: // cadastrar pessoa
+                    String cpf = JOptionPane.showInputDialog("CPF:");
+                    boolean isCpf = false;
+                    for (Pessoa p : listaPessoa) {
+                        if (p.getCpf().equals(cpf)) {
+                            JOptionPane.showMessageDialog(null, "JÁ EXISTE ALGUEM COM ESSE CPF!");
+                            isCpf = true;
+                            break;
+                        }
+                    }
+                    if (!isCpf) {
+                        listaPessoa.adicionar(new Pessoa(
+                                cpf,
+                                JOptionPane.showInputDialog("Nome:")
+                        ));
+                        JOptionPane.showMessageDialog(null, "CADASTRADO COM SUCESSO!");
+                    }
+                    break;
+                case 5://
 
             }
         } while (op != 0);
