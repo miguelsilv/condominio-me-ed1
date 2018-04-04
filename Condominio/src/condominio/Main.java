@@ -3,6 +3,7 @@ package condominio;
 import estruturas.vetor.MyVetor;
 import java.util.Scanner;
 import javax.swing.JOptionPane;
+import model.Bloco;
 import model.Condominio;
 
 /**
@@ -14,6 +15,24 @@ public class Main {
     public static boolean hasCondominio(int cod, MyVetor<Condominio> listaCondominio) {
         for (Condominio c : listaCondominio) {
             if (c.getCodigo() == cod) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean hasBloco(int cod, MyVetor<Bloco> listaCondominio) {
+        for (Bloco b : listaCondominio) {
+            if (b.getCodigo() == cod) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean hasAP(int num, MyVetor<Integer> listAP) {
+        for (int b : listAP) {
+            if (b == num) {
                 return true;
             }
         }
@@ -43,9 +62,9 @@ public class Main {
                 case 1://cadastrar condominio
                     listaCondominio.adicionar(new Condominio(codCondominio++,
                             JOptionPane.showInputDialog("Nome do condominio:"),
-                            Double.parseDouble(JOptionPane.showInputDialog("Valor que cada apartamento paga"))
+                            Double.parseDouble(JOptionPane.showInputDialog("Valor que cada apartamento paga:"))
                     ));
-                    JOptionPane.showMessageDialog(null, "CADASTRADO COM SUCESSO \nCód: " + codCondominio);
+                    JOptionPane.showMessageDialog(null, "CADASTRADO COM SUCESSO \nCód: " + (codCondominio - 1));
                     break;
                 case 2://cadastrar bloco
                     int codCondCadastroBloco = Integer.parseInt(JOptionPane.showInputDialog("Código do condomínio"));
@@ -54,7 +73,6 @@ public class Main {
                             if (c.getCodigo() == codCondCadastroBloco) {
                                 int codBlocoCadastroBloco = c.addBloco(JOptionPane.showInputDialog("Nome do bloco:"));
                                 JOptionPane.showMessageDialog(null, "CADASTRADO COM SUCESSO \nCód: " + codBlocoCadastroBloco);
-
                                 break;
                             }
                         }
@@ -63,7 +81,24 @@ public class Main {
                     }
                     break;
                 case 3: // cadastrar apartamento
-
+                    int codCondCadastrarAP = Integer.parseInt(JOptionPane.showInputDialog("Código do condomínio"));
+                    if (hasCondominio(codCondCadastrarAP, listaCondominio)) {
+                        for (Condominio c : listaCondominio) {
+                            if (c.getCodigo() == codCondCadastrarAP) {
+                                int codBlocoCadastrarAP = Integer.parseInt(JOptionPane.showInputDialog("Código do bloco"));
+                                if (hasBloco(codBlocoCadastrarAP, c.getListaBlocos())) {
+                                    for (Bloco b : c.getListaBlocos()) {
+                                        if (b.getCodigo() == codBlocoCadastrarAP) {
+                                            b.addApartamento(Integer.parseInt(JOptionPane.showInputDialog("Número do apartamento")));
+                                            JOptionPane.showMessageDialog(null, "CADASTRADO COM SUCESSO!");
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Condominio não encontrado");
+                    }
                     break;
 
             }
