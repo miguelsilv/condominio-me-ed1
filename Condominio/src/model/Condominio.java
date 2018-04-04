@@ -21,8 +21,17 @@ public class Condominio {
         listaBlocos = new MyVetor<>();
     }
 
-    public void addBloco(String nome) {
+    public int addBloco(String nome) {
         this.listaBlocos.adicionar(new Bloco(codBloco++, nome));
+        return codBloco;
+    }
+
+    public void addApartamento(int codBloco) {
+        for (Bloco b : listaBlocos) {
+            if (b.getCodigo() == codBloco) {
+
+            }
+        }
     }
 
     public int getCodigo() {
@@ -36,7 +45,5 @@ public class Condominio {
     public double getValor() {
         return valor;
     }
-    
-    
 
 }

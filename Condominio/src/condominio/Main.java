@@ -45,19 +45,26 @@ public class Main {
                             JOptionPane.showInputDialog("Nome do condominio:"),
                             Double.parseDouble(JOptionPane.showInputDialog("Valor que cada apartamento paga"))
                     ));
+                    JOptionPane.showMessageDialog(null, "CADASTRADO COM SUCESSO \nCód: " + codCondominio);
                     break;
                 case 2://cadastrar bloco
                     int codCondCadastroBloco = Integer.parseInt(JOptionPane.showInputDialog("Código do condomínio"));
                     if (hasCondominio(codCondCadastroBloco, listaCondominio)) {
                         for (Condominio c : listaCondominio) {
                             if (c.getCodigo() == codCondCadastroBloco) {
-                                c.addBloco(JOptionPane.showInputDialog("Nome do bloco:"));
+                                int codBlocoCadastroBloco = c.addBloco(JOptionPane.showInputDialog("Nome do bloco:"));
+                                JOptionPane.showMessageDialog(null, "CADASTRADO COM SUCESSO \nCód: " + codBlocoCadastroBloco);
+
                                 break;
                             }
                         }
                     } else {
                         JOptionPane.showMessageDialog(null, "Condominio não encontrado");
                     }
+                    break;
+                case 3: // cadastrar apartamento
+
+                    break;
 
             }
         } while (op != 0);
