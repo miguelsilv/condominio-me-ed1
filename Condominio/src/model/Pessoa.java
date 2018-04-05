@@ -7,6 +7,7 @@ package model;
 public class Pessoa {
 
     private String cpf, nome;
+    private int ap;
 
     public Pessoa(String cpf, String nome) {
         this.cpf = cpf;
@@ -20,5 +21,7 @@ public class Pessoa {
     public String getNome() {
         return nome;
     }
+    
+   
 
 }
