@@ -184,10 +184,10 @@ public class Main {
                                                             } else {
                                                                 JOptionPane.showMessageDialog(null, "pessoa não encontrada");
                                                             }
+                                                            break;
                                                         } else {
                                                             JOptionPane.showMessageDialog(null, "Este AP já foi vendido!");
                                                         }
-                                                        break;
                                                     }
                                                 }
                                             } else {
@@ -206,8 +206,16 @@ public class Main {
                         JOptionPane.showMessageDialog(null, "Condominio não encontrado");
                     }
                     break;
-
-                case 10:
+                case 6:
+                    for (Condominio c : listaCondominio) {
+                        JOptionPane.showMessageDialog(null, "Cód: " + c.getCodigo() + "\n"
+                                + "Bloco:" + null + " \n"
+                                + "Não vendidos: \n"
+                                + "Vendidos: \n"
+                                + "Total: \n");
+                    }
+                    break;
+                case 10: // listar cond pessoa
                     String cpfListagemAp = JOptionPane.showInputDialog("CPF:");
                     if (hasPessoa(cpfListagemAp, listaPessoa)) {
                         for (Pessoa p : listaPessoa) {
