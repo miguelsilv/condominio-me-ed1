@@ -121,14 +121,12 @@ public class Main {
                                     for (Bloco b : c.getListaBlocos()) {
                                         if (b.getCodigo() == codBlocoCadastrarAP) {
                                             int numAp = Integer.parseInt(JOptionPane.showInputDialog("Número do apartamento"));
-                                            do {
-                                                if (!hasAP(numAp, b.getListAP())) {
-                                                    b.addApartamento(numAp);
-                                                    JOptionPane.showMessageDialog(null, "CADASTRADO COM SUCESSO!");
-                                                } else {
-                                                    JOptionPane.showMessageDialog(null, "Esse Apartamento já existe, informe outro!");
-                                                }
-                                            } while (hasAP(numAp, b.getListAP()));
+                                            if (!hasAP(numAp, b.getListAP())) {
+                                                b.addApartamento(numAp);
+                                                JOptionPane.showMessageDialog(null, "CADASTRADO COM SUCESSO!");
+                                            } else {
+                                                JOptionPane.showMessageDialog(null, "Esse Apartamento já existe, informe outro!");
+                                            }
                                         }
                                     }
                                 } else {
@@ -181,6 +179,7 @@ public class Main {
                                                                         break;
                                                                     }
                                                                 }
+                                                                break;
                                                             } else {
                                                                 JOptionPane.showMessageDialog(null, "pessoa não encontrada");
                                                             }
@@ -188,17 +187,20 @@ public class Main {
                                                         } else {
                                                             JOptionPane.showMessageDialog(null, "Este AP já foi vendido!");
                                                         }
+                                                        break;
                                                     }
                                                 }
+                                                break;
                                             } else {
                                                 JOptionPane.showMessageDialog(null, "Apartamento não encontrado");
                                             }
                                         }
                                     }
-
+                                    break;
                                 } else {
                                     JOptionPane.showMessageDialog(null, "Bloco não encontrado");
                                 }
+                                break;
                             }
                         }
 
@@ -214,6 +216,11 @@ public class Main {
                                 + "Vendidos: \n"
                                 + "Total: \n");
                     }
+                    break;
+                case 7://Listar apartamentos de um condomínio
+                case 8:
+                case 9:
+                    JOptionPane.showMessageDialog(null, "Ainda não implementado");
                     break;
                 case 10: // listar cond pessoa
                     String cpfListagemAp = JOptionPane.showInputDialog("CPF:");
